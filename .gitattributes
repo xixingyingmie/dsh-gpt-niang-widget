@@ -1,0 +1,31 @@
+# ============================================================================
+# 换行策略：仓库内与工作区都锁死为 LF
+#
+# 这不是洁癖 —— 本项目对字节敏感：
+#   1) lib/ 下的产物由 tools/build-gptniang.mjs 从 upstream/ 做**字节级**文本变换生成，
+#      `npm run check` 会断言产物是最新的；
+#   2) upstream/ 的设计前提是「上游文件永远保持原样」，这样 `git merge upstream/main`
+#      才不会冲突。
+# 若 git 在 checkout 时把工作区换成 CRLF，上面两条都会失效：check 报假失败、
+# diff 出现整文件级假差异、merge 产生无意义冲突。
+# ============================================================================
+
+* text=auto eol=lf
+
+# 上游原文：禁止任何换行转换，必须与上游逐字节一致
+upstream/** -text
+
+# 生成产物：按文本处理便于 review，但强制 LF
+lib/gptniang-index.js  text eol=lf
+lib/gptniang-widget.js text eol=lf
+
+# 二进制素材
+*.png  binary
+*.gif  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.mp3  binary
+*.wav  binary
+*.zip  binary

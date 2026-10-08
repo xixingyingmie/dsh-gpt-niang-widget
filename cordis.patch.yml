@@ -1,0 +1,17 @@
+# ============================================================================
+# dsh-gpt-niang-widget —— DSH bundle patch
+# ============================================================================
+# 这是「GPT娘」挂件的挂载声明。DSH 启动时按 bundle 层栈叠加各插件 patch，
+# 本文件把挂件插入 Web profile 的配置树。
+#
+# ⚠️ bundle id 与包名都与上游 dsh-whale-widget、以及 dsh-xiaoke-widget 保持
+#    不同 —— 三者可以同时安装、各挂一只桌宠（路由前缀 /dsh-gptniang/ 与
+#    /dsh-whale/、/dsh-xiaoke/ 互不冲突，DOM class / localStorage 键也已隔离）。
+#
+# 安装方式：
+#   dsh plugin --profile desktop add link:<本目录绝对路径>
+# ============================================================================
+
+- insert:
+    - id: gptniang-widget
+      name: dsh-gpt-niang-widget

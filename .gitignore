@@ -1,0 +1,29 @@
+# ============================================================================
+# 运行时数据 / 凭据：绝不入库
+# 这些文件都是用户本机在 $DSH_HOME 生成或本人专属的，带着既是隐私泄露也会污染用户环境。
+# ============================================================================
+.dshgn-*.json
+.dshgn-*.json.bak*
+.dshgn-usage-archive.json
+.credentials.yaml
+.env
+gh-token.txt
+
+# Codex 的凭据 / 配置（若在仓库目录里出现过）
+auth.json
+config.toml
+
+# 用户生成的资源目录
+gptniang-roles/
+gptniang-audio/
+gptniang-bubble-imgs/
+sessions/
+
+# 依赖与临时物
+node_modules/
+*.zip
+*.log
+*.bak
+*.bak2
+*.bak-devpaths
+_patch_*.patch
