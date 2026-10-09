@@ -35,7 +35,10 @@ DSH Web 界面右下角的一只桌宠。点她会冒出各种 GPT / ChatGPT 味
 
 - 小鲸鱼 → **GPT娘**
 - 台词池**整体重写**：上游那 48 条一条不留，换成 **54 条 GPT 味台词**，分陪伴撒娇 / 吐槽阴阳 / AI 圈内梗 / GPT 产品梗 / 白饭主线五组
-- **配色与皮肤保持不变**（沿用上游 DeepSeek 靛蓝）—— 挂件显示的本来就是 DSH 的 DeepSeek 账户余额，靛蓝与语义一致。想换成 OpenAI 青绿（`#10a37f` 系）：在 `skin/gptniang-theme.mjs` 里填 `HEX_TEXT` / `HEX_FILL` / `RGBA_MAP` 后重新构建。
+- **皮肤换成银紫色**：正文 `#443a63`、主色块与对话框描边 `#6f61a0`、气泡内壁和面板底 `#faf8fe`、次文字 `#8a80a8`。正文和主色**刻意分成两张表** —— 上游同一个 `#203170` 既当 109 处正文、又当 13 处填充且上面压着白字，主色一味压深会把白字糊掉，所以正文另走更深的 `#443a63`（白底约 10:1）。
+- **刻意不动**：语义红绿（超支 `#e0433f`、谷价 `#2fa24c`）、按钮上的白字、跑马灯那 15 套 `rgb()` 渐变（那是你自己排的内容）。想换配色就改 `skin/gptniang-theme.mjs` 的 `HEX_TEXT` / `HEX_FILL` / `RGBA_MAP` / `WHITE_FILL`，再 `npm run build`。
+
+![设置页面](docs/skin-settings.png)
 
 台词大概长这样：
 
@@ -104,7 +107,8 @@ python tools/set-character-image.py          # 不带参数 = 只体检当前图
 | `lib/gptniang-index.js`、`lib/gptniang-widget.js` | 生成产物（已提交，link: 安装可直接用） |
 | `lib/accounting.mjs` | 宿主记账模块，与上游**字节相同**（零角色引用，可跨桌宠共享） |
 | `assets/` | 角色图 + 音效 + 泡泡图 |
-| `docs/preview.png` | 挂件截图（README 用） |
+| `docs/preview.png` | 挂件截图（银紫皮肤 + 对话框，README 开头用） |
+| `docs/skin-settings.png` | 设置页面截图（银紫皮肤，README 用） |
 | `docs/sanxiaozhi.png` | 三只桌宠同台合影（README 结尾用） |
 | `tools/preview-widget.mjs` | 本地预览页：把真实宿主插件挂到 mock ctx 上、派发真实路由，看效果不必装 |
 | `tools/verify-coexist.mjs` | **共存回归**：把小鲸鱼 / 小克 / GPT娘三只同时挂到一个 mock 宿主上，断言 69 条路由零重复、各守各的前缀、三份 widget 脚本都注入成功 |
