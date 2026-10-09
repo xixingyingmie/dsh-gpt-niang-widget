@@ -6,8 +6,8 @@
 //   node tools/dump-copy.mjs            # 打印到终端
 //   node tools/dump-copy.mjs --write    # 写成 COPY-INVENTORY.md
 //
-// 为什么需要它：同一份台词在源码里有 4 份副本（1 份活跃 + 2 份兜底 + 1 份死代码），
-// 手抄行号极易出错，所以行号一律现场计算。
+// 为什么需要它：同一份台词在源码里共有 5 处存放地（4 份 `lines:` 数组 + 1 份按权重
+// 分组的老 RANDOM_GROUPS），手抄行号极易出错，所以行号一律现场计算。
 // ============================================================================
 
 import fs from 'node:fs'
@@ -46,9 +46,11 @@ A('> 由 `node tools/dump-copy.mjs` 生成（只读，不改任何文件）。�
 A()
 A('## ℹ️ 台词由构建期替换表统一管理')
 A()
-A('台词池在**上游源码**里有 4 份副本（1 活跃 + 2 兜底 + 1 死代码），本项目**不手改任何一份** ——')
-A('而是由 `skin/gptniang-theme.mjs` 的 `COPY_REWRITE` / `COPY_APPEND` 在构建时统一套用，')
-A('所以 4 份一次性全覆盖，且 `git merge upstream` 后重跑构建会自动重新套上。')
+A('台词相关的位置在**上游源码**里共有 5 处（4 份 `lines:` 数组 + 1 份按权重分组的老 `RANDOM_GROUPS`），')
+A('本项目**不手改任何一处** —— 而是由 `skin/gptniang-theme.mjs` 导出的 `COPY_POOL` 在构建时')
+A('**整体替换**（不是追加、也不是改写）：4 份数组一次性换掉，老 `RANDOM_GROUPS` 也按同一份')
+A('`COPY_POOL` 重新生成（组数/权重/形态照抄上游）。所以产物里不会残留任何一句上游台词；')
+A('`git merge upstream` 后重跑构建会自动重新套上。')
 A()
 A('| 副本 | 位置 | 状态 |')
 A('|---|---|---|')
@@ -56,6 +58,7 @@ A(`| ① \`BUBBLE_DEFAULT_ITEMS\` | \`lib/gptniang-widget.js\` L${poolLine} | **
 A(`| ② \`bubbleDefaultRandomLines()\` | L${findAll(fe, 'function bubbleDefaultRandomLines()')[0]} | 兜底 |`)
 A(`| ③ \`bubbleDefaultSecondModules()\` | L${findAll(fe, 'function bubbleDefaultSecondModules()')[0]} | 兜底 |`)
 A(`| ④ \`bubbleDefaultQueue()\` | L${findAll(fe, 'function bubbleDefaultQueue()')[0]} | 死代码（第 3 行就 return） |`)
+A(`| ⑤ \`RANDOM_GROUPS\` | L${findAll(fe, 'var RANDOM_GROUPS = [')[0]} | 老路径（默认配置下不可达，仍一并重写） |`)
 A()
 A('要改台词：编辑 `skin/gptniang-theme.mjs` → `node tools/build-gptniang.mjs`。')
 A()

@@ -34,17 +34,17 @@ DSH Web 界面右下角的一只桌宠。点她会冒出各种 GPT / ChatGPT 味
 ## 和原版的区别
 
 - 小鲸鱼 → **GPT娘**
-- 48 条鲸鱼味台词 → **58 条 GPT 味台词**（改写 9 条身份句 + 新增 10 条招牌梗）
+- 台词池**整体重写**：上游那 48 条一条不留，换成 **54 条 GPT 味台词**，分陪伴撒娇 / 吐槽阴阳 / AI 圈内梗 / GPT 产品梗 / 白饭主线五组
 - **配色与皮肤保持不变**（沿用上游 DeepSeek 靛蓝）—— 挂件显示的本来就是 DSH 的 DeepSeek 账户余额，靛蓝与语义一致。想换成 OpenAI 青绿（`#10a37f` 系）：在 `skin/gptniang-theme.mjs` 里填 `HEX_TEXT` / `HEX_FILL` / `RGBA_MAP` 后重新构建。
 
 台词大概长这样：
 
-> As an AI language model, I cannot...
-> 抱歉，我不能帮你做这个。
-> 你的 20 美元到账了，我可以开始思考了。
-> AGI 明年就到，这次是真的。
-> Thinking...
-> ChatGPT is at capacity right now. (?
+> 我在等你的下一条提示词。
+> 达到使用上限，X 小时后重置。（X 由你决定）
+> 9.11 和 9.9 哪个大？别问我，我不数数。
+> strawberry 里有几个 r？……我去调代码解释器。
+> 我编得这么认真，你居然真去查。
+> 你可以点「重新生成」，我保证这次也不对。
 
 剩下的自己点出来看，全清单见 [`COPY-INVENTORY.md`](COPY-INVENTORY.md)。
 
@@ -99,7 +99,7 @@ python tools/set-character-image.py          # 不带参数 = 只体检当前图
 | 路径 | 说明 |
 |---|---|
 | `upstream/` | **原封不动**的上游源码（`lib/index.js`、`assets/whale-widget.js`、上游 README / PROVENANCE） |
-| `skin/gptniang-theme.mjs` | 唯一事实来源：命名空间改名表、颜色表、台词改写/追加减 |
+| `skin/gptniang-theme.mjs` | 唯一事实来源：命名空间改名表、颜色表、**台词池 `COPY_POOL`**（构建期整体替换上游 5 处存放地） |
 | `tools/build-gptniang.mjs` | 生成器（纯文本变换 + 三重断言） |
 | `lib/gptniang-index.js`、`lib/gptniang-widget.js` | 生成产物（已提交，link: 安装可直接用） |
 | `lib/accounting.mjs` | 宿主记账模块，与上游**字节相同**（零角色引用，可跨桌宠共享） |
